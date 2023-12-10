@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\PostValidate;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 
 class PostValidateListener
 {
@@ -21,12 +22,6 @@ class PostValidateListener
      */
     public function handle(PostValidate $event): void
     {
-        $request = $event->request;
-        $request->validate([
-            'content' => 'required|min:10'
-        ], [
-            'content.required' => 'Введите текст',
-            'content.min' => 'Ваш текст должен быть минимум :min символов.'
-        ]);
+        Log::info('New Post Created!' . $event->post);
     }
 }

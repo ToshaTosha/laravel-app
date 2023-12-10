@@ -6,12 +6,12 @@ use App\Listeners\PostValidateListener;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Events\PostValidate;
 
 class PostController extends Controller
 {
     public function create(Request $request)
     {
-        event(new PostValidateListener($request));
 
         $user = Auth::user();
         $post = new Post([
@@ -20,6 +20,7 @@ class PostController extends Controller
             'user_id' => $user->id,
         ]);
         $post->save();
+        event(new PostValidate($request));
         return redirect()->route('home');
     }
 

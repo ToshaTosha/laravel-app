@@ -15,14 +15,14 @@ class PostValidate
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $request;
+    public $post;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(Request $request)
+    public function __construct(Request $post)
     {
-        $this->request = $request;
+        $this->post = $post;
     }
 
     /**
